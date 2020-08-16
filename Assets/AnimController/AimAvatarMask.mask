@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AimAvatarMask
+  m_Mask: 00000000000000000000000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: body
+    m_Weight: 0
+  - m_Path: mecha
+    m_Weight: 0
+  - m_Path: rig
+    m_Weight: 0
+  - m_Path: rig/IK_visao
+    m_Weight: 0
+  - m_Path: rig/IK_visao/IK_olho.L
+    m_Weight: 0
+  - m_Path: rig/IK_visao/IK_olho.L/IK_olho.L_end
+    m_Weight: 0
+  - m_Path: rig/IK_visao/IK_olho.R
+    m_Weight: 0
+  - m_Path: rig/IK_visao/IK_olho.R/IK_olho.R_end
+    m_Weight: 0
+  - m_Path: rig/main
+    m_Weight: 0
+  - m_Path: rig/main/IK_cotovelo.L
+    m_Weight: 0
+  - m_Path: rig/main/IK_cotovelo.L/IK_cotovelo.L_end
+    m_Weight: 0
+  - m_Path: rig/main/IK_cotovelo.R
+    m_Weight: 0
+  - m_Path: rig/main/IK_cotovelo.R/IK_cotovelo.R_end
+    m_Weight: 0
+  - m_Path: rig/main/IK_joelho.L
+    m_Weight: 0
+  - m_Path: rig/main/IK_joelho.L/IK_joelho.L_end
+    m_Weight: 0
+  - m_Path: rig/main/IK_joelho.R
+    m_Weight: 0
+  - m_Path: rig/main/IK_joelho.R/IK_joelho.R_end
+    m_Weight: 0
+  - m_Path: rig/main/IK_mao.L
+    m_Weight: 0
+  - m_Path: rig/main/IK_mao.L/IK_mao.L_end
+    m_Weight: 0
+  - m_Path: rig/main/IK_mao.R
+    m_Weight: 0
+  - m_Path: rig/main/IK_mao.R/IK_mao.R_end
+    m_Weight: 0
+  - m_Path: rig/main/IK_pe.L
+    m_Weight: 0
+  - m_Path: rig/main/IK_pe.L/IK_pe.L_end
+    m_Weight: 0
+  - m_Path: rig/main/IK_pe.R
+    m_Weight: 0
+  - m_Path: rig/main/IK_pe.R/IK_pe.R_end
+    m_Weight: 0
+  - m_Path: rig/pelvis
+    m_Weight: 1
+  - m_Path: rig/pelvis/abdomen
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/anelar1.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/anelar1.L/anelar2.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/anelar1.L/anelar2.L/anelar3.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/anelar1.L/anelar2.L/anelar3.L/anelar3.L_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/indicador1.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/indicador1.L/indicador2.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/indicador1.L/indicador2.L/indicador3.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/indicador1.L/indicador2.L/indicador3.L/indicador3.L_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/medio1.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/medio1.L/medio2.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/medio1.L/medio2.L/medio3.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/medio1.L/medio2.L/medio3.L/medio3.L_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/minimo1.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/minimo1.L/minimo2.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/minimo1.L/minimo2.L/minimo3.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/minimo1.L/minimo2.L/minimo3.L/minimo3.L_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/polegar1.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/polegar1.L/polegar2.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/polegar1.L/polegar2.L/polegar3.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.L/braco.L/antebraco.L/mao.L/polegar1.L/polegar2.L/polegar3.L/polegar3.L_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/anelar1.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/anelar1.R/anelar2.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/anelar1.R/anelar2.R/anelar3.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/anelar1.R/anelar2.R/anelar3.R/anelar3.R_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/indicador1.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/indicador1.R/indicador2.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/indicador1.R/indicador2.R/indicador3.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/indicador1.R/indicador2.R/indicador3.R/indicador3.R_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/medio1.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/medio1.R/medio2.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/medio1.R/medio2.R/medio3.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/medio1.R/medio2.R/medio3.R/medio3.R_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/minimo1.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/minimo1.R/minimo2.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/minimo1.R/minimo2.R/minimo3.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/minimo1.R/minimo2.R/minimo3.R/minimo3.R_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/polegar1.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/polegar1.R/polegar2.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/polegar1.R/polegar2.R/polegar3.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/clavicula.R/braco.R/antebraco.R/mao.R/polegar1.R/polegar2.R/polegar3.R/polegar3.R_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/cabelo1
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/cabelo1/cabelo2
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/cabelo1/cabelo2/cabelo3
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/cabelo1/cabelo2/cabelo3/cabelo4
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/cabelo1/cabelo2/cabelo3/cabelo4/cabelo4_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/IK_cabelo
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/IK_cabelo/IK_cabelo_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/maxilar
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/maxilar/maxilar_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/olho.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/olho.L/olho.L_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/olho.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/pescoco/cabeca/olho.R/olho.R_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/respiracao
+    m_Weight: 0
+  - m_Path: rig/pelvis/abdomen/torax/respiracao/respiracao_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.L/canela.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.L/canela.L/pe.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.L/canela.L/pe.L/pontape.L
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.L/canela.L/pe.L/pontape.L/pontape.L_end
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.R/canela.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.R/canela.R/pe.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.R/canela.R/pe.R/pontape.R
+    m_Weight: 0
+  - m_Path: rig/pelvis/femur.R/canela.R/pe.R/pontape.R/pontape.R_end
+    m_Weight: 0

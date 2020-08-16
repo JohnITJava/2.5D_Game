@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1105 &110500000
+HumanTemplate:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CybergHit
+  m_BoneTemplate:
+    Head: cabeca
+    Hips: pelvis
+    Jaw: maxilar
+    Left Index Distal: indicador3.L
+    Left Index Intermediate: indicador2.L
+    Left Index Proximal: indicador1.L
+    Left Little Distal: minimo3.L
+    Left Little Intermediate: minimo2.L
+    Left Little Proximal: minimo1.L
+    Left Middle Distal: medio3.L
+    Left Middle Intermediate: medio2.L
+    Left Middle Proximal: medio1.L
+    Left Ring Distal: anelar3.L
+    Left Ring Intermediate: anelar2.L
+    Left Ring Proximal: anelar1.L
+    Left Thumb Distal: polegar3.L
+    Left Thumb Intermediate: polegar2.L
+    Left Thumb Proximal: polegar1.L
+    LeftEye: olho.L
+    LeftFoot: pe.L
+    LeftHand: mao.L
+    LeftLowerArm: antebraco.L
+    LeftLowerLeg: canela.L
+    LeftShoulder: clavicula.L
+    LeftToes: pontape.L
+    LeftUpperArm: braco.L
+    LeftUpperLeg: femur.L
+    Neck: pescoco
+    Right Index Distal: indicador3.R
+    Right Index Intermediate: indicador2.R
+    Right Index Proximal: indicador1.R
+    Right Little Distal: minimo3.R
+    Right Little Intermediate: minimo2.R
+    Right Little Proximal: minimo1.R
+    Right Middle Distal: medio3.R
+    Right Middle Intermediate: medio2.R
+    Right Middle Proximal: medio1.R
+    Right Ring Distal: anelar3.R
+    Right Ring Intermediate: anelar2.R
+    Right Ring Proximal: anelar1.R
+    Right Thumb Distal: polegar3.R
+    Right Thumb Intermediate: polegar2.R
+    Right Thumb Proximal: polegar1.R
+    RightEye: olho.R
+    RightFoot: pe.R
+    RightHand: mao.R
+    RightLowerArm: antebraco.R
+    RightLowerLeg: canela.R
+    RightShoulder: clavicula.R
+    RightToes: pontape.R
+    RightUpperArm: braco.R
+    RightUpperLeg: femur.R
+    Spine: abdomen

@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Map
+  - Weapon
+  - Inventory
+  - WeaponPosition
+  - LeftHand
+  - Door
+  - MenuPause
+  - DoorButton
+  - Gate
+  - LHPoint
+  - BulletRevolver
+  - BulletSpawn
+  - AimRay
+  - AimTarget
+  - MgazineRevolver
+  - RevolverMagazineClassic
+  - RightHand
+  - Enemy
+  - Turret
+  - TurretBullet
+  - AmmoBox
+  - Ammo
+  - GUI
+  - HeadTitle
+  - EventPanel
+  - EnemyTitle
+  - ClassicBulletRevolver
+  - EventSystem
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - Map
+  - Jump
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
