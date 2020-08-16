@@ -23,7 +23,7 @@ namespace Game2D
 
         private InventoryControl _inventoryControl;
         private MainMenuHandler _menuHandler;
-        private Dictionary<float, TextMeshProUGUI> _hpTitles = new Dictionary<float, TextMeshProUGUI>();
+        private Dictionary<TextMeshProUGUI, float> _hpTitles = new Dictionary<TextMeshProUGUI, float>();
 
         private Item _currentWeapon;
         private Item _oldWeapon;
@@ -70,17 +70,15 @@ namespace Game2D
 
             if (_hpTitles.Count > 0)
             {
-                _hpTitles.Keys.ToList().ForEach(e => {
+                _hpTitles.Values.ToList().ForEach(e => {
                     e += Time.deltaTime;
 
                     if (e >= _msgTimeout)
                     {
-                        TextMeshProUGUI title;
-                        _hpTitles.TryGetValue(e, out title);
+                        TextMeshProUGUI title = _hpTitles.FirstOrDefault(x => Mathf.Approximately(x.Value, e)).Key;
                         DisableTextTitle(title);
-                        _hpTitles.Remove(e);
+                        _hpTitles.Remove(title);
                     }
-
                 });
             }
         }
@@ -143,7 +141,15 @@ namespace Game2D
 
         private void UpdatePlayerHeadTitle(float inputDamage)
         {
-            _hpTitles.Add(0.1f, _playerHeadTitle);
+            if (_hpTitles.ContainsKey(_playerHeadTitle))
+            {
+                _hpTitles[_playerHeadTitle] = 0.0f;
+            }
+            else
+            {
+                _hpTitles.Add(_playerHeadTitle, 0.0f);
+            }
+            
 
             _playerHeadTitle.enabled = true;
             _playerHeadTitle.SetText($"-{inputDamage}HP");
@@ -152,7 +158,7 @@ namespace Game2D
         private void UpdateEnemyHeadTitle(GameObject enemy, float damage)
         {
             var enemyHeadTitle = enemy.GetComponentInChildren<TextMeshProUGUI>();
-            _hpTitles.Add(0.0f, enemyHeadTitle);
+            _hpTitles.Add(enemyHeadTitle, 0.0f);
 
             enemyHeadTitle.enabled = true;
             enemyHeadTitle.SetText($"-{damage}HP");

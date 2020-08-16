@@ -26,7 +26,7 @@ namespace Game2D
                 if (collision.gameObject.CompareTag("Turret"))
                 {
                     var gun = gameObject.GetComponentInParent<EnergyRevolver>();
-                    gun.Damage(collision.gameObject.GetComponent<GatlingGun>());                   
+                    gun.Damage(collision.gameObject.GetComponentInChildren<IDieble>());                   
                 }
                 gameObject.transform.SetParent(_mapObject);
             }
