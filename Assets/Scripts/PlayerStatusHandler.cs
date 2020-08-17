@@ -6,6 +6,8 @@ namespace Game2D
     public sealed class PlayerStatusHandler : MonoBehaviour, IDieble
     {
 
+        [SerializeField] private SoundPlayer _soundPlayer;
+
         [SerializeField] private float _health;
 
         private EventHandler _eventHandler;
@@ -33,6 +35,7 @@ namespace Game2D
         public void Die()
         {
             print("U DEAD!!!");
+            _soundPlayer.PlaySound(SoundEffectType.PlayerDieing, true);
         }
     }
 

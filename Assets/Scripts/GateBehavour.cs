@@ -5,6 +5,8 @@ namespace Game2D
 {
     public sealed class GateBehavour : MonoBehaviour
     {
+
+        [SerializeField] private SoundPlayer _soundPlayer;
         [SerializeField] private GameObject _gate;
         [SerializeField] private int _buttonPressedCounter;
 
@@ -30,6 +32,8 @@ namespace Game2D
             {             
                 _distance -= _distance * Time.deltaTime;
                 _gate.transform.position = Vector3.MoveTowards(transform.position, transform.position - Vector3.right * _distance, _distance * Time.deltaTime);
+
+                _soundPlayer.PlaySound(SoundEffectType.GateOpenning, true);
 
                 if ((transform.position - (transform.position - Vector3.right * _distance)).x <= 0.1f)
                 {

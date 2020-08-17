@@ -7,6 +7,8 @@ namespace Game2D
     {
         #region Fields
 
+        [SerializeField] private SoundPlayer _soundPlayer;
+
         [SerializeField] private GameObject _bulletSpawn;
         [SerializeField] private GameObject _bullet;
         [SerializeField] private Transform go_baseRotation;
@@ -30,6 +32,7 @@ namespace Game2D
         private Vector3 _targetVector;
 
         private bool _canFire = false;
+        private bool _isAlive;
         private float _currentRotationSpeed;
         private float _deltaAngle;
         private float _timer;
@@ -73,12 +76,16 @@ namespace Game2D
             _currentRotationSpeed = _barrelRotationSpeed;
             this.GetComponent<SphereCollider>().radius = _firingRange / gameObject.transform.localScale.x;
             _eventHandler = GameObject.FindGameObjectWithTag("GUI").GetComponent<EventHandler>();
+            _isAlive = true;
         }
 
         private void Update()
         {
-            _timer += Time.deltaTime;
-            AimAndFire();
+            if (_isAlive)
+            {
+                _timer += Time.deltaTime;
+                AimAndFire();
+            }
         }
 
         private void OnDrawGizmosSelected()
@@ -141,16 +148,24 @@ namespace Game2D
             {
                 var bullet = Instantiate(_bullet, _bulletSpawn.transform.position, _bulletSpawn.transform.rotation);
                 _timer = 0.0f;
+
+                _soundPlayer.PlaySound(SoundEffectType.TurretShooting, true);
             }
         }
 
         public void Die()
         {
-            var rigidBody = gameObject.GetComponent<Rigidbody>();
+            _isAlive = false;
+            var rb = GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.None;
+            rb.AddForce(transform.up * 0.1f, ForceMode.Impulse);
 
-            //rigidBody.AddForce(new Vector3(0.0f, 1.0f, 0.0f), ForceMode.Impulse);
-            rigidBody.AddExplosionForce(5.0f, transform.position, 5.0f);
+            transform.rotation = Quaternion.AngleAxis(-35.0f, Vector3.right);
+            transform.rotation = Quaternion.AngleAxis(35.0f, Vector3.forward);
 
+            _soundPlayer.PlaySound(SoundEffectType.TurretDieing, true);
+
+            Destroy(gameObject, 5.0f);
         }
 
         public void Damage(IDieble enemy)
@@ -169,7 +184,9 @@ namespace Game2D
 
             if (enemy.Health <= 0)
             {
-                _eventHandler.TriggerEvent(EventType.SMB_KILLED, enemyObject.tag + " " + this.name);
+                enemy.Die();
+                _eventHandler.TriggerEvent(EventType.SMB_KILLED, $"{enemyObject.tag} by Turret");
+                _isAlive = false;
             }
         }
 

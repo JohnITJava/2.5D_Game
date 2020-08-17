@@ -5,8 +5,10 @@ namespace Game2D
 {
     public sealed class GateButton : MonoBehaviour
     {
-        [SerializeField] private bool _isPressed;
 
+        [SerializeField] private SoundPlayer _soundPlayer;
+
+        [SerializeField] private bool _isPressed;
 
         private EventHandler _eventHandler;
         private bool _flag;
@@ -42,6 +44,8 @@ namespace Game2D
             _flag = true;
             GameObject.FindGameObjectWithTag("Gate").GetComponent<GateBehavour>().ButtonCounter += 1;
             _eventHandler.TriggerEvent(EventType.INFO, "Gate button toggled");
+
+            _soundPlayer.PlaySound(SoundEffectType.ButtonToggling, true);
         }
     }
 }

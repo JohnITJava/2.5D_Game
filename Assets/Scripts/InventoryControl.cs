@@ -11,6 +11,8 @@ namespace Game2D
 
         #region Fields
 
+        [SerializeField] private SoundPlayer _soundPlayer;
+
         [SerializeField] private List<Item> _items;
         [SerializeField] private bool _isIK;
 
@@ -122,14 +124,17 @@ namespace Game2D
                 {
                     case nameof(ItemType.Weapon):
                         AddToInventory(item, ItemType.Weapon);
+                        _soundPlayer.PlaySound(SoundEffectType.ItemGetting, true);
                         break;
 
                     case nameof(ItemType.Heal):
                         AddToInventory(item, ItemType.Heal);
+                        _soundPlayer.PlaySound(SoundEffectType.ItemGetting, true);
                         break;
 
                     case nameof(ItemType.Ammo):
                         AddToInventory(item, ItemType.Ammo);
+                        _soundPlayer.PlaySound(SoundEffectType.ItemGetting, true);
                         break;
 
                     default:
@@ -328,6 +333,8 @@ namespace Game2D
         }
         private void ChangeItemActivityWithinState()
         {
+            _soundPlayer.PlaySound(SoundEffectType.ChangingItem, true);
+
             if (_currentItem.activeSelf == false)
             {
                 _currentItem.SetActive(true);

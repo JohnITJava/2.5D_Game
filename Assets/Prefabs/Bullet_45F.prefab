@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c0d1f46e5aed84593336896215d681, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletDamageClassic: 20
+  _soundPlayer: {fileID: 0}
+  _energyBulletDamage: 0
 --- !u!136 &136436518488396882
 CapsuleCollider:
   m_ObjectHideFlags: 0

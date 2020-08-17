@@ -22,8 +22,8 @@ namespace Game2D
         [SerializeField] private float _playerFullHealth;
 
         private InventoryControl _inventoryControl;
+        private PlayerStatusHandler _playerStatus;
         private MainMenuHandler _menuHandler;
-        private Dictionary<TextMeshProUGUI, float> _hpTitles = new Dictionary<TextMeshProUGUI, float>();
 
         private Item _currentWeapon;
         private Item _oldWeapon;
@@ -34,7 +34,7 @@ namespace Game2D
         private EventType _triggeredEvent;
 
         private Regex _patternForNameAndDamage = new Regex(@"([a-zA-Z]{1,15}) ([0-9]{1,5})");
-        private Regex _patternForKilledAndKiller = new Regex(@"([a-zA-Z]{1,15}) ([0-9]{1,5})");
+        private Regex _patternForKilledAndKiller = new Regex(@"([a-zA-Z]{1,15}) by ([a-zA-Z]{1,15})");
 
         private string _describedEventMessage;
         private bool _isEventTriggered;
@@ -42,6 +42,7 @@ namespace Game2D
         private int _ammoMaxForCurrentWeapon;
         private int _magazine;
 
+        private float _KilledTimerTimeout = 3.0f;
         private float _killedTimer;
 
         private void Start()
@@ -51,6 +52,7 @@ namespace Game2D
             _playerHeadTitle.enabled = false;
             _inventoryControl = _player.GetComponent<InventoryControl>();
             _menuHandler = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<MainMenuHandler>();
+            _playerStatus = _player.GetComponent<PlayerStatusHandler>();
             ItemUtil.InitializeMatcher();
             _ammoBarTransform = _ammoBar.GetComponent<RectTransform>();
             UpdateAmmoBar();
@@ -68,18 +70,15 @@ namespace Game2D
                 UpdateAmmoBar();
             }
 
-            if (_hpTitles.Count > 0)
+            if (_killedTimer >= 0.1f)
             {
-                _hpTitles.Values.ToList().ForEach(e => {
-                    e += Time.deltaTime;
+                _killedTimer += Time.deltaTime;
 
-                    if (e >= _msgTimeout)
-                    {
-                        TextMeshProUGUI title = _hpTitles.FirstOrDefault(x => Mathf.Approximately(x.Value, e)).Key;
-                        DisableTextTitle(title);
-                        _hpTitles.Remove(title);
-                    }
-                });
+                if (_killedTimer >= _KilledTimerTimeout && _playerStatus.Health <= 0)
+                {
+                    _menuHandler.PauseGame();
+                    _killedTimer = 0.0f;
+                }
             }
         }
 
@@ -122,7 +121,8 @@ namespace Game2D
                     break;
 
                 case EventType.SMB_KILLED:
-                    UpdateEventPanel(describedEventMessage, _killedTimer);
+                    var killedTimerStart = 0.1f;
+                    UpdateEventPanel(describedEventMessage, killedTimerStart);
                     break;
 
                 case EventType.INFO:
@@ -141,16 +141,6 @@ namespace Game2D
 
         private void UpdatePlayerHeadTitle(float inputDamage)
         {
-            if (_hpTitles.ContainsKey(_playerHeadTitle))
-            {
-                _hpTitles[_playerHeadTitle] = 0.0f;
-            }
-            else
-            {
-                _hpTitles.Add(_playerHeadTitle, 0.0f);
-            }
-            
-
             _playerHeadTitle.enabled = true;
             _playerHeadTitle.SetText($"-{inputDamage}HP");
         }
@@ -158,7 +148,6 @@ namespace Game2D
         private void UpdateEnemyHeadTitle(GameObject enemy, float damage)
         {
             var enemyHeadTitle = enemy.GetComponentInChildren<TextMeshProUGUI>();
-            _hpTitles.Add(enemyHeadTitle, 0.0f);
 
             enemyHeadTitle.enabled = true;
             enemyHeadTitle.SetText($"-{damage}HP");
@@ -176,25 +165,19 @@ namespace Game2D
 
         private void UpdateEventPanel(string describedEventMessage, float timer)
         {
-            if (timer <= 3.0f)
-            {
-                var killedTag = _patternForKilledAndKiller.Match(describedEventMessage).Groups[1].Value;
-                var killed = GameObject.FindGameObjectWithTag(killedTag);
-                var killer = _patternForKilledAndKiller.Match(describedEventMessage).Groups[2].Value;
+            _killedTimer = timer;
 
-                if (killedTag.Equals("Player"))
-                {
-                    UpdateEventPanel($"YOU LOOSE {killed.name.ToUpper()}. YOU was killed by {killer.ToUpper()}! \n You can start again, but I think you too week for this shit!");
-                    timer += Time.deltaTime;
-                }
-                else
-                {
-                    UpdateEventPanel($"{killed.name.ToUpper()} WAS KILLED BY {killer.ToUpper()}! \n CONGRATS!");
-                }
+            var killedTag = _patternForKilledAndKiller.Match(describedEventMessage).Groups[1].Value;
+            var killed = GameObject.FindGameObjectWithTag(killedTag);
+            var killer = _patternForKilledAndKiller.Match(describedEventMessage).Groups[2].Value;
+
+            if (killedTag.Equals("Player"))
+            {
+                UpdateEventPanel($"YOU LOOSE {killed.name.ToUpper()}. YOU was killed by {killer.ToUpper()}! \n You can start again, but I think you too week for this shit!");
             }
             else
             {
-                _menuHandler.PauseGame();
+                UpdateEventPanel($"{killed.name.ToUpper()} WAS KILLED BY {killer.ToUpper()}! \n CONGRATS!");
             }
         }
 

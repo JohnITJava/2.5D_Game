@@ -1,52 +1,59 @@
 ﻿using UnityEngine;
 
 
-public sealed class BoxesHandler : MonoBehaviour
+namespace Game2D
 {
-    [SerializeField] private GameObject _box;
-
-    private Animator _boxAnimator;
-    private bool _wasPressed;
-    private int _boxPressedCounter;
-
-
-    public int PressedECounter
+    public sealed class BoxesHandler : MonoBehaviour
     {
-        get => _boxPressedCounter;
-    }
+        [SerializeField] private SoundPlayer _soundPlayer;
 
-    private void Start()
-    {
-        _boxAnimator = _box.GetComponent<Animator>();
-    }
+        [SerializeField] private GameObject _box;
 
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    _wasPressed = true;
-        //    _boxPressedCounter++;
-        //}
-    }
+        private Animator _boxAnimator;
+        private bool _wasPressed;
+        private int _boxPressedCounter;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
+
+        public int PressedECounter
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                _wasPressed = true;
-                _boxPressedCounter++;
-
-                if (_wasPressed)
-                {
-                    _boxAnimator.SetTrigger("openCloseTrigger");
-                    _wasPressed = false;
-                }
-            }
-
+            get => _boxPressedCounter;
         }
 
+        private void Start()
+        {
+            _boxAnimator = _box.GetComponent<Animator>();
+        }
 
+        private void Update()
+        {
+            //if (Input.GetKeyDown(KeyCode.E))
+            //{
+            //    _wasPressed = true;
+            //    _boxPressedCounter++;
+            //}
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    _wasPressed = true;
+                    _boxPressedCounter++;
+
+                    if (_wasPressed)
+                    {
+                        _boxAnimator.SetTrigger("openCloseTrigger");
+                        _wasPressed = false;
+                    }
+
+                    _soundPlayer.PlaySound(SoundEffectType.BoxOpenning, true);
+                }
+
+            }
+
+
+        }
     }
 }

@@ -5,14 +5,18 @@ namespace Game2D
 {
     public class BulletBehaviour : MonoBehaviour
     {
+
         [SerializeField] private float _energyBulletDamage;
-      
+
+        private SoundPlayer _soundPlayer;
+
         private GameObject _parentBox;
         private Transform _mapObject;
 
 
         private void Start()
         {
+            _soundPlayer = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<SoundPlayer>();
             _parentBox = transform.parent.parent.gameObject;
             _mapObject = GameObject.FindGameObjectWithTag("Map").gameObject.transform;          
         }
@@ -26,8 +30,17 @@ namespace Game2D
                 if (collision.gameObject.CompareTag("Turret"))
                 {
                     var gun = gameObject.GetComponentInParent<EnergyRevolver>();
-                    gun.Damage(collision.gameObject.GetComponentInChildren<IDieble>());                   
+                    if (gun != null)
+                    {
+                        gun.Damage(collision.gameObject.GetComponentInChildren<IDieble>());
+                    }                                      
                 }
+                else
+                {
+                    _soundPlayer.PlaySound(SoundEffectType.BulletMilk, true);
+                }
+
+
                 gameObject.transform.SetParent(_mapObject);
             }
         }

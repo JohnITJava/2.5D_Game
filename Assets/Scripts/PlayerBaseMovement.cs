@@ -7,6 +7,8 @@ namespace Game2D
     {
         #region Fields
 
+        [SerializeField] private SoundPlayer _soundPlayer;
+
         [SerializeField] private Vector3 _forceVector;
         [SerializeField] private float _turnSpeed;
         [SerializeField] private float _moveSpeed;
@@ -17,22 +19,25 @@ namespace Game2D
         private Animator _animator;
         private Rigidbody _rigidbody;
 
+        private RaycastHit _rayHit;
+        private LayerMask _mask = 1 << 9;
+
         private Vector3 _movement;
         private Vector3 _jumpMovement;
         private Vector3 _direction;
         private Vector3 _rotation;
+        private Vector3 _rot;
 
         private float _acсeleration;
         private float _rotAcceleration;
         private float _turnMovement;
+        private float _rayLength = 1.0f;
+
         private bool _isJumpInProcess;
         private bool _isMoving;
-        private Vector3 _rot;
-
-        private bool _isRayCast;
-        private RaycastHit _rayHit;
-        private float _rayLength = 1.0f;
-        private LayerMask _mask = 1 << 9;     
+        private bool _isStateChanged;
+        private bool _stateBefore;
+        private bool _isRayCast;  
 
         #endregion
 
@@ -97,6 +102,12 @@ namespace Game2D
         private void MoveAndRotate()
         {
             _rigidbody.velocity = _movement * Time.fixedDeltaTime;
+
+            if (_isStateChanged)
+            {
+                _isStateChanged = false;
+                _soundPlayer.PlaySound(SoundEffectType.Running, _isMoving);              
+            }           
         }
 
         private void UpdateDirections()
@@ -124,13 +135,14 @@ namespace Game2D
                 bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
                 bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
 
+                _stateBefore = _isMoving;
                 _isMoving = hasHorizontalInput || hasVerticalInput;
-            }
-        }
 
-        public void Die()
-        {
-           
+                if (_stateBefore != _isMoving)
+                {
+                    _isStateChanged = true;
+                }
+            }
         }
 
         private void Jump()
@@ -140,7 +152,12 @@ namespace Game2D
                 _jumpMovement = (transform.forward * Mathf.Sign(_direction.x) + _forceVector) * _jumpSpeed;
                 _rigidbody.transform.position += _jumpMovement * Time.fixedDeltaTime;
 
-                _isJumpInProcess = true;
+                if (!_isJumpInProcess)
+                {
+                    _soundPlayer.PlaySound(SoundEffectType.Jumping, true);
+                }
+
+                _isJumpInProcess = true;               
             }
         }
 
@@ -148,11 +165,6 @@ namespace Game2D
         {
             _animator.SetBool("isJumpPressed", _isJumpPressed);
             _animator.SetBool("isMoving", _isMoving);
-        }
-
-        private void StabilizeFall()
-        {
-
         }
 
         #endregion

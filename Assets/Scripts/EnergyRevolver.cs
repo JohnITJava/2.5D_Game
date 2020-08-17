@@ -6,6 +6,8 @@ namespace Game2D
     public sealed class EnergyRevolver : MonoBehaviour, IDamagable
     {
 
+        [SerializeField] private SoundPlayer _soundPlayer;
+
         [SerializeField] private GameObject _bullet;
         [SerializeField] private GameObject _bulletSpawn;
         [SerializeField] private float _damage;
@@ -86,7 +88,7 @@ namespace Game2D
             if (enemy.Health <= 0)
             {
                 enemy.Die();
-                _eventHandler.TriggerEvent(EventType.SMB_KILLED, $"{enemyTag} {commonDamage}");
+                _eventHandler.TriggerEvent(EventType.SMB_KILLED, $"{enemyTag} by Player");
             }
         }
 
@@ -96,6 +98,8 @@ namespace Game2D
             {
                 _isEmpty = true;
                 _eventHandler.TriggerEvent(EventType.INFO, "MAGAZINE IS EMPTY! \n NEED TO RELOAD");
+
+                _soundPlayer.PlaySound(SoundEffectType.Empty, true);
             }
 
             if (_time >= _timeout && !_isEmpty)
@@ -113,6 +117,7 @@ namespace Game2D
                 _time = 0.0f;
 
                 _eventHandler.TriggerEvent(EventType.AMMO_DISCHARGE, "-1 Bullet");
+                _soundPlayer.PlaySound(SoundEffectType.EnergyWeaponShooting, true);
             }
         }
 
@@ -131,6 +136,8 @@ namespace Game2D
                         _isEmpty = false;
                         _eventHandler.TriggerAmmoBarRecalc();
                         _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
+
+                        _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                     }
                     else
                     {
@@ -138,6 +145,8 @@ namespace Game2D
                         _isEmpty = false;
                         _eventHandler.TriggerAmmoBarRecalc();
                         _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
+
+                        _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                     }
                 }
             }
@@ -149,6 +158,8 @@ namespace Game2D
                     _isEmpty = false;
                     _eventHandler.TriggerAmmoBarRecalc();
                     _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
+
+                    _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                 }
                 else if (_ammo.Count > 8)
                 {
@@ -156,6 +167,8 @@ namespace Game2D
                     _isEmpty = false;
                     _eventHandler.TriggerAmmoBarRecalc();
                     _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
+
+                    _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                 }
                 else if (_ammo.Count <= 0)
                 {

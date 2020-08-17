@@ -98,7 +98,10 @@
     <Compile Include="Assets\Scripts\MainMenuHandler.cs" />
     <Compile Include="Assets\Scripts\PlayerBaseMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerStatusHandler.cs" />
+    <Compile Include="Assets\Scripts\SoundEffectType.cs" />
+    <Compile Include="Assets\Scripts\SoundPlayer.cs" />
     <Compile Include="Assets\Scripts\StandardShaderUtils.cs" />
+    <Compile Include="Assets\Scripts\TitleBehaviour.cs" />
     <Compile Include="Assets\Scripts\TurretBullet.cs" />
     <Compile Include="Assets\Scripts\WeaponType.cs" />
     <Compile Include="Assets\Textures\3D Models\Props\Weapons\DWm715 FPS Model\Resources\Scripts\Inspect.cs" />

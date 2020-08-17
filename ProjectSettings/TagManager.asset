@@ -32,6 +32,7 @@ TagManager:
   - EnemyTitle
   - ClassicBulletRevolver
   - EventSystem
+  - SoundPlayer
   layers:
   - Default
   - TransparentFX
