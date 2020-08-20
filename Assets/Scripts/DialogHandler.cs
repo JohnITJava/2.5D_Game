@@ -9,6 +9,7 @@ namespace Game2D
 
         #region Fields
 
+        [SerializeField] private SoundPlayer _soundPlayer;
         [SerializeField] private GameObject _dialogPanel;
         private TMPro.TextMeshProUGUI _textArea;
 
@@ -32,8 +33,11 @@ namespace Game2D
         {
             if (_isDialog)
             {
-                UpdateText();
+                UpdateText();              
             }
+
+            _soundPlayer.PlayNPCSpeech(_isDialog);
+            
         }
 
         private void OnTriggerEnter(Collider other)

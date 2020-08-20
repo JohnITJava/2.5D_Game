@@ -3,8 +3,6 @@ using TMPro;
 using System.Text;
 using System.Text.RegularExpressions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Game2D
 {
@@ -44,6 +42,8 @@ namespace Game2D
 
         private float _KilledTimerTimeout = 3.0f;
         private float _killedTimer;
+        private float _errorBarCorrelator = 10.0f;
+
 
         private void Start()
         {
@@ -194,22 +194,33 @@ namespace Game2D
 
             if (_currentWeapon != null)
             {
-                if ((_currentWeapon.GameItem.activeSelf && _magazine == 0 || _magazine == _ammoMaxForCurrentWeapon))
+
+                if (_currentWeapon.GameItem.activeSelf && _magazine > 0 && _triggeredEvent.Equals(EventType.AMMO_DISCHARGE))
+                {
+                    RederAmmoBarWithinShots(1);
+                    _triggeredEvent = EventType.INFO;
+                }
+                else if (_triggeredEvent.Equals(EventType.AMMO_RELOAD))
+                {
+                    RenderFullAmmoBar();
+                    _triggeredEvent = EventType.INFO;
+                }
+                else if (_currentWeapon.GameItem.activeSelf && _magazine == 0)
                 {
                     _magazine = _currentWeapon.GameItem.GetComponent<IDamagable>().Magazine;
                     var type = ItemUtil.DetermineMagazineTypeByWeapon(_currentWeapon);
                     _ammoMaxForCurrentWeapon = (int)type;
                     RenderFullAmmoBar();
                 }
-                else if (_currentWeapon.GameItem.activeSelf && _magazine > 0)
+                else if (_currentWeapon.GameItem.activeSelf)
                 {
-                    RederAmmoBarWithinShots(_ammoMaxForCurrentWeapon - _magazine);
-                }
-
-                if (_triggeredEvent.Equals(EventType.AMMO_DISCHARGE))
-                {
-                    RederAmmoBarWithinShots(1);
-                    _triggeredEvent = EventType.INFO;
+                    _magazine = _currentWeapon.GameItem.GetComponent<IDamagable>().Magazine;
+                    var type = ItemUtil.DetermineMagazineTypeByWeapon(_currentWeapon);
+                    _ammoMaxForCurrentWeapon = (int)type;
+                    if (_ammoMaxForCurrentWeapon != 0)
+                    {
+                        RenderAmmoBarWithinMagazine();
+                    }                  
                 }
 
                 if (!_currentWeapon.GameItem.activeSelf)
@@ -223,9 +234,20 @@ namespace Game2D
             }
         }
 
+        private void RenderAmmoBarWithinMagazine()
+        {
+            if (_magazine <= 0)
+            {
+                throw new Exception("Expected bullets left > 0");
+            }
+
+            _ammoBarOffset.x =  (AMMO_BAR_LENGTH - (AMMO_BAR_LENGTH * _magazine) / _ammoMaxForCurrentWeapon) * -1;
+            _ammoBarTransform.offsetMax = _ammoBarOffset;
+        }
+
         private void RederAmmoBarWithinShots(int bulletsLeft)
         {
-            if (bulletsLeft < 0)
+            if (bulletsLeft <= 0)
             {
                 throw new Exception("Expected bullets left > 0");
             }
@@ -235,7 +257,8 @@ namespace Game2D
             }
 
             _ammoBarOffset.x = _ammoBarOffset.x - (AMMO_BAR_LENGTH * bulletsLeft) / _ammoMaxForCurrentWeapon;
-            _ammoBarTransform.offsetMax = _ammoBarOffset;
+            _ammoBarTransform.offsetMax = Mathf.Abs(_ammoBarOffset.x) - _errorBarCorrelator >= AMMO_OFFSET_MAX ?
+                throw new ArgumentException($"Offset Bar Length too less than its minimum {_ammoBarOffset.x} > {AMMO_OFFSET_MAX} - Need to Check!") : _ammoBarOffset;
         }
 
         private void RenderMinAmmoBar()
@@ -256,5 +279,13 @@ namespace Game2D
         {
             _needRecalcAmmoBar = true;
         }
+
+        public void TriggerAmmoBarRecalc(EventType type)
+        {
+            _triggeredEvent = type;
+            _needRecalcAmmoBar = true;
+        }
+
+
     }
 }

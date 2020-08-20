@@ -815,6 +815,12 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.postprocessing.Editor">
+      <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Library/ScriptAssemblies/com.unity.postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.postprocessing.Runtime">
+      <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Library/ScriptAssemblies/com.unity.postprocessing.Runtime.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

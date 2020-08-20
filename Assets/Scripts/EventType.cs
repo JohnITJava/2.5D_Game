@@ -8,6 +8,7 @@ namespace Game2D
         DMG_ENEMY,
         ITEM_RECEIVE,
         AMMO_DISCHARGE,
+        AMMO_RELOAD,
         SMB_KILLED,
         INFO
     }

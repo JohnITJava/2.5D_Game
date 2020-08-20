@@ -15,13 +15,18 @@ namespace Game2D
         private static float MIN_SLIDER_VALUE = 0.0f;
         private static float DEFAULT_SLIDER_VALUE = 0.8f;
 
-
         [SerializeField] private List<AudioSource> _sources;
+        [SerializeField] private List<AudioClip> _npcClips;
+        [SerializeField] private AudioSource _npcSource;
+
         [SerializeField] private AudioMixer _audioMixer;
 
         [SerializeField] private Toggle _toggle;
         [SerializeField] private Slider _slider;
 
+
+        private bool _isNpcSoundPlaying;
+        private int _clipCounter;
 
         public void MuteAllSound()
         {
@@ -61,9 +66,40 @@ namespace Game2D
                 {
                     audioInit.Stop();
                 }
-            }          
+            }
         }
 
+        public void PlayNPCSpeech(bool isDialog)
+        {
+            if (isDialog)
+            {
+                if (!_npcSource.isPlaying)
+                {
+                    _isNpcSoundPlaying = true;
 
+                    _npcSource.clip = _npcClips[_clipCounter];
+                    var clipDuration = _npcClips[_clipCounter].length;
+                    _npcSource.loop = false;
+
+                    _npcSource.Play();
+
+
+                    print("CLIP! " + _npcSource.clip.name);
+                    _clipCounter++;
+                    _clipCounter = _clipCounter % _npcClips.Count;
+                }
+            }
+            else
+            {
+                if (_npcSource != null)
+                {
+                    _clipCounter = 0;
+                    _npcSource.Stop();
+                    _npcSource.clip = null;
+                }
+            }
+        }
     }
+
+
 }

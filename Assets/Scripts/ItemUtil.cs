@@ -1,12 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 
 namespace Game2D
 {
     public static class ItemUtil
     {
+        private static List<string> _existedGameTags;
+
+        public static List<string> AllTags
+        {
+            set => _existedGameTags = value;
+        }
 
         private static List<string> _energyRevolverTagsNames = new List<string>()
         {
@@ -61,7 +68,6 @@ namespace Game2D
                 { MagazineType.TWO_PISTOLS_BULLET, _doublePistolsTagsNames }
             });
         }
-
         private static Dictionary<WeaponType, Dictionary<MagazineType, List<string>>> GetGunsToMagazineToTagNameMatcher()
         {
             return GunMagazineMatcherTagsNames;
@@ -101,14 +107,14 @@ namespace Game2D
             GunMagazineMatcherTagsNames.TryGetValue(wtype, out dict);
             dict.TryGetValue(mtype, out allTagsNames);
 
-            return allTagsNames;
+            return allTagsNames.Count == 0 ? throw new ArgumentNullException("Can not find relevant tags, but it should be!") : allTagsNames;
         }
 
         public static WeaponType DetermineWeaponClassByItem(Item item)
         {
             if (!item.Type.Equals(ItemType.Weapon))
             {
-                throw new System.Exception("Invalid item type for this method");
+                throw new ArgumentException("Invalid item type for this method");
             }
             var refDefinitions = GetReferencedTypesOfItemByTagName(item.GameItem);
             return refDefinitions.Keys.First();
@@ -118,10 +124,26 @@ namespace Game2D
         {
             if (!weapon.Type.Equals(ItemType.Weapon))
             {
-                throw new System.Exception("Invalid item type for this method");
+                throw new ArgumentException("Invalid item type for this method");
             }
             var refDefinitions = GetReferencedTypesOfItemByTagName(weapon.GameItem);
-            return refDefinitions.Values.First();
+            Debug.LogWarning($"Reference definition types size for {weapon.Name} is {refDefinitions.Count} -  Attention!");
+            
+            return refDefinitions.Values.FirstOrDefault();
+        }
+
+        public static List<string> FilterExistedGameTagsWithin(List<string> possibleTags)
+        {
+            List<string> existedTags = null;
+            try
+            {             
+                var a = _existedGameTags.Where(e => possibleTags.Any(pt => pt.Equals(e)));
+            }
+            finally
+            {
+                Debug.LogWarning("Tag is not defined in tag list of game");
+            }
+            return existedTags;
         }
     }
 }

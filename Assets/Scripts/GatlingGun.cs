@@ -8,6 +8,8 @@ namespace Game2D
         #region Fields
 
         [SerializeField] private SoundPlayer _soundPlayer;
+        [SerializeField] private ParticleSystem _shootExplosion;
+        [SerializeField] private ParticleSystem _deathEffect;
 
         [SerializeField] private GameObject _bulletSpawn;
         [SerializeField] private GameObject _bullet;
@@ -136,6 +138,7 @@ namespace Game2D
             }
             else
             {
+                _shootExplosion.Stop();
                 _currentRotationSpeed = Mathf.Lerp(_currentRotationSpeed, 0, 10 * Time.deltaTime);
                 go_baseRotation.rotation = Quaternion.Slerp(go_baseRotation.rotation, _baseRotation, _barrelRotationSpeed * Time.deltaTime);
 
@@ -145,8 +148,10 @@ namespace Game2D
         private void ShootProcess()
         {
             if (_timer >= _reloadTimeout)
-            {
+            {               
                 var bullet = Instantiate(_bullet, _bulletSpawn.transform.position, _bulletSpawn.transform.rotation);
+                _shootExplosion.gameObject.SetActive(true);
+                _shootExplosion.Play();
                 _timer = 0.0f;
 
                 _soundPlayer.PlaySound(SoundEffectType.TurretShooting, true);
@@ -157,6 +162,9 @@ namespace Game2D
         {
             _isAlive = false;
             var rb = GetComponent<Rigidbody>();
+            _deathEffect.gameObject.SetActive(true);
+            _deathEffect.Play();
+
             rb.constraints = RigidbodyConstraints.None;
             rb.AddForce(transform.up * 0.1f, ForceMode.Impulse);
 

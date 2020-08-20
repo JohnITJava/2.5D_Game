@@ -312,6 +312,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="PackageManagerAssembly">
+      <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Assets/EffectExamples/Editor/PackageManagerAssembly/PackageManagerAssembly.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
@@ -704,6 +707,12 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.postprocessing.Editor">
+      <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Library/ScriptAssemblies/com.unity.postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.postprocessing.Runtime">
+      <HintPath>C:/Users/John/Unity Projects/TestUnityProj/2.5D/2.5D_Game/Library/ScriptAssemblies/com.unity.postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

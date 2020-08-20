@@ -13,6 +13,7 @@ namespace Game2D
         [SerializeField] private float _damage;
         [SerializeField] private float _timeout;
         [SerializeField] private float _startShootSpeed;
+        [SerializeField] private ParticleSystem _energyExplosion;
 
         private EventHandler _eventHandler;
         private InventoryControl _inventoryControl;
@@ -99,7 +100,7 @@ namespace Game2D
                 _isEmpty = true;
                 _eventHandler.TriggerEvent(EventType.INFO, "MAGAZINE IS EMPTY! \n NEED TO RELOAD");
 
-                _soundPlayer.PlaySound(SoundEffectType.Empty, true);
+                _soundPlayer.PlaySound(SoundEffectType.Empty, true);            
             }
 
             if (_time >= _timeout && !_isEmpty)
@@ -112,12 +113,15 @@ namespace Game2D
                 var rigidBody = _newBullet.GetComponent<Rigidbody>();
                 var impulse = _bulletSpawn.transform.forward * rigidBody.mass * _startShootSpeed;
                 rigidBody.AddForce(impulse, ForceMode.Impulse);
-                _magazine--;
-                _ammo.Count--;
+                --_magazine;
+                --_ammo.Count;
                 _time = 0.0f;
 
                 _eventHandler.TriggerEvent(EventType.AMMO_DISCHARGE, "-1 Bullet");
                 _soundPlayer.PlaySound(SoundEffectType.EnergyWeaponShooting, true);
+                
+                _energyExplosion.gameObject.SetActive(true);
+                _energyExplosion.Play();
             }
         }
 
@@ -134,18 +138,18 @@ namespace Game2D
                     {
                         _magazine = _ammo.Count;
                         _isEmpty = false;
+
                         _eventHandler.TriggerAmmoBarRecalc();
                         _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
-
                         _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                     }
                     else
                     {
                         _magazine = 8;
                         _isEmpty = false;
+                       
                         _eventHandler.TriggerAmmoBarRecalc();
                         _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
-
                         _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                     }
                 }
@@ -156,18 +160,18 @@ namespace Game2D
                 {
                     _magazine = _ammo.Count;
                     _isEmpty = false;
+
                     _eventHandler.TriggerAmmoBarRecalc();
                     _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
-
                     _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                 }
                 else if (_ammo.Count > 8)
                 {
                     _magazine = 8;
                     _isEmpty = false;
+
                     _eventHandler.TriggerAmmoBarRecalc();
                     _eventHandler.TriggerEvent(EventType.INFO, "Reloaded!");
-
                     _soundPlayer.PlaySound(SoundEffectType.ReloadEnergyWeapon, true);
                 }
                 else if (_ammo.Count <= 0)

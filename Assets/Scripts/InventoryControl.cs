@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
 namespace Game2D
 {
     public sealed class InventoryControl : MonoBehaviour
@@ -256,7 +255,7 @@ namespace Game2D
                 if (name.Equals("RevolverMagazineClassic"))
                 {
                     wrappedItem.Count += 6; // Base count in revolver ammo pack                 
-                } 
+                }
                 else if (name.Equals("RevolverMagazine"))
                 {
                     itemInList.Count += 8; // Base count in revolver ammo pack                        
@@ -282,7 +281,7 @@ namespace Game2D
                 if (name.Equals("RevolverMagazineClassic"))
                 {
                     wrappedItem.Count = 6; // Base count in revolver ammo pack
-                } 
+                }
                 else if (name.Equals("RevolverMagazine"))
                 {
                     wrappedItem.Count = 8; // Base count in revolver ammo pack
@@ -302,7 +301,7 @@ namespace Game2D
             if (item.name.Contains("Two") || item.name.Contains("Double"))
             {
                 isTwoHandle = true;
-            }           
+            }
             return new Item(item.name, type, item, isTwoHandle, Count);
         }
 
@@ -316,7 +315,7 @@ namespace Game2D
 
         private void ChangeWeapon()
         {
-            if (_weaponList!=null && _weaponList.Count != 0)
+            if (_weaponList != null && _weaponList.Count != 0)
             {
                 _inventoryPointer++;
                 _inventoryPointer = _inventoryPointer % _weaponList.Count;
@@ -325,7 +324,7 @@ namespace Game2D
                 {
                     _currentItem = _weaponList[_inventoryPointer].GameItem;
                     MoveObjectAsChildTo(_currentItem, _leftPlayerHand);
-                    _leftPlayerHand.GetComponent<ItemHandlerBehaviour>().ItemInHand = _weaponList[_inventoryPointer];                   
+                    _leftPlayerHand.GetComponent<ItemHandlerBehaviour>().ItemInHand = _weaponList[_inventoryPointer];
                     _animator.SetTrigger("ChangeWeapon");
                     _leftPlayerHand.GetComponent<ItemHandlerBehaviour>().IsCurrentItemChanged = true;
                 }
@@ -365,34 +364,63 @@ namespace Game2D
 
         public Item GetAmmoForCurrentWeapon()
         {
-            if (_currentItem == null)
-            {
-                return null;
-            } 
-
             Item ammo = null;
-            var referencedParams = ItemUtil.GetReferencedTypesOfItemByTagName(_currentItem);
 
-            if (referencedParams.Count != 0)
+            if (_currentItem != null)
             {
-                var wtype = referencedParams.Keys.First();
-                var mtype = referencedParams.Values.First();
+                var referencedParams = ItemUtil.GetReferencedTypesOfItemByTagName(_currentItem);
 
-                var allRelevantTagNames = ItemUtil.GetAllRelevantTagsNamesByItemTypes(wtype, mtype);
-
-                foreach (var e in allRelevantTagNames)
+                if (referencedParams.Count != 0)
                 {
-                    ammo = _supplyList.Find(s => 
-                        s.GameItem.CompareTag(e) | s.GameItem.name.Contains(e)
-                    );
-                    if (ammo != null)
+                    var wtype = referencedParams.Keys.First();
+                    var mtype = referencedParams.Values.First();
+
+                    var itemRelevantTags = ItemUtil.GetAllRelevantTagsNamesByItemTypes(wtype, mtype);
+
+                    var tagsForChecks = ItemUtil.FilterExistedGameTagsWithin(itemRelevantTags);
+
+                    if (tagsForChecks != null)
                     {
-                        break;
+                        TryToFindAmmoByTag(tagsForChecks, out ammo);
+                    }
+
+                    if (ammo == null)
+                    {
+                        TryToFindAmmoByName(itemRelevantTags, out ammo);
                     }
                 }
             }
-            
             return ammo;
+        }
+
+        private void TryToFindAmmoByName(List<string> itemRelevantTags, out Item ammo)
+        {
+            ammo = null;
+
+            foreach (var tn in itemRelevantTags)
+            {
+                ammo = _supplyList.FirstOrDefault(s =>
+                {
+                    var shortName = s.GameItem.name.Split()[0];
+                    return shortName.Contains(tn);
+                });
+            }
+        }
+
+        private void TryToFindAmmoByTag(List<string> tagsForChecks, out Item ammo)
+        {
+            ammo = null;
+
+            foreach (var tc in tagsForChecks)
+            {
+                ammo = _supplyList.FirstOrDefault(t =>
+                t.GameItem.CompareTag(tc));
+
+                if (ammo != null)
+                {
+                    break;
+                }
+            }
         }
 
 
